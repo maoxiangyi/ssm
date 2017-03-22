@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 命名空间，现在随便起名，后面有重要的作用 -->
+<mapper namespace="cn.base.ssm.mapper.UserMapper">
+
+	<!-- 在mapper.xml文件中 有四种典型的标签代表增删改查，它们分别是(select\update\delete\insert) id 
+		属性代表 statement id parameterType 代表输入的参数的类型 resultType 代表输出参数的类型 -->
+	<select id="getUserById" parameterType="int"
+		resultType="cn.base.ssm.po.User">
+		SELECT
+		id,username,birthday,sex,address FROM USER WHERE id =
+		#{id12}
+	</select>
+	<!-- #{id} 获取输入的参数值 ，其中的id名称 可以任意取名字 ${value} 获取用户输入的参数值，其中value的名称不能改变 
+		区别：#{id}获取变量值 ${value} 获取变量值 并做字符串拼接 -->
+	<select id="getUserByName" parameterType="string"
+		resultType="cn.base.ssm.po.User">
+		SELECT id,username,birthday,sex,address FROM USER WHERE
+		username LIKE "%${value}%"
+	</select>
+
+	<!-- 对数据进行修改需要 sqlSession 进行commit 如果返回 插入手生成的自增长id 该如何操作？ -->
+	<insert id="insertUser" parameterType="cn.base.ssm.po.User">
+		INSERT into user (username,birthday,sex,address)
+		values (#{username},
+		#{birthday}, #{sex}, #{address})
+	</insert>
+
+	<!-- 删除用户 -->
+	<delete id="deleteUser" parameterType="int">
+		delete from user where id
+		= #{id}
+	</delete>
+
+	<!-- 修改用户 -->
+	<update id="updateUser" parameterType="cn.base.ssm.po.User">
+		UPDATE mybatis.user
+		SET
+		username = #{username} ,
+		birthday = #{birthday} ,
+		sex = #{sex} ,
+		address = #{address}
+		WHERE
+		id = #{id} ;
+	</update>
+
+</mapper>
