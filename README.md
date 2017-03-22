@@ -2,7 +2,7 @@
  
 ssm web project( Spring MVC、Spring、Ibatis)
 
-使用maven整合三大框架的Web项目工程，克隆后直接使用通过。   
+使用maven整合三大框架的Web项目工程，克隆后直接使用。   
 
 
 # 版本说明

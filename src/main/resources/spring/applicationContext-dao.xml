@@ -7,8 +7,10 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
-
-	<!-- 数据库连接池 -->
+	
+	<!-- Spring集成ibatis需要配置三个部分：数据源、spring-ibatis集成包中的SqlSessionFactoryBean、mapper包扫描器 -->
+	
+	<!-- 第一部分：数据库连接池 -->
 	<!-- 加载配置文件 -->
 	<context:property-placeholder location="classpath:properties/*.properties" />
 	<!-- 数据库连接池 -->
@@ -21,6 +23,8 @@
 		<property name="maxActive" value="10" />
 		<property name="minIdle" value="5" />
 	</bean>
+	
+	<!-- 第二部分： spring-ibatis集成包中的SqlSessionFactoryBean -->
 	<!-- 让spring管理sqlsessionfactory 使用mybatis和spring整合包中的 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<!-- 数据库连接池 -->
@@ -28,6 +32,8 @@
 		<!-- 加载mybatis的全局配置文件 -->
 		<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml" />
 	</bean>
+	
+	<!-- 第二部分：配置mapper包扫描器 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="cn.base.ssm.mapper" />
 	</bean>

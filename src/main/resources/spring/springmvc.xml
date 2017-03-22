@@ -8,26 +8,25 @@
         http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
+	<!-- 常见的springmvc 配置文件包含三个部分：包扫描器、annotation-driven、视图解析器 -->
+
+	<!-- 第一部分：配置包扫描期 -->
 	<context:component-scan base-package="cn.base.ssm.controller" />
-	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager" />   
-	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">   
-	    <property name="favorPathExtension" value="false" />  
-	    <property name="favorParameter" value="false" />   
-	    <property name="ignoreAcceptHeader" value="false" />   
-	    <property name="mediaTypes" >   
-	        <value>  
-	            atom=application/atom+xml  
-	            html=text/html  
-	            json=application/json
-	            *=*/*  
-	        </value>   
-	    </property>  
-	</bean>  
 	
+	<!-- 第二部分：配置 annotation-driven -->
+	<!-- springmvc 三大组件 HandlerMapping、HandlerAdapter、ViewResolver 默认配置在spring-webmvc-*.RELEASE.jar的DispatcherServlet.properties文件中 
+		可以根据根据自己的需求进行配置 -->
+	<!-- 手动配置 springmvc 3.1 版本之后推荐使用的 HandlerMapping、HandlerAdapter -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/> -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/> -->
+
+	<!-- 配置注解驱动 如果配置此标签，可以不用手动配置 HandlerMapping、HandlerAdapter -->
+	<mvc:annotation-driven />
+	
+	<!-- 第三部分：配置视图解析器 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-
 </beans>
