@@ -18,7 +18,7 @@ public class IndexController {
 	public String showIndex(Integer id,Model model) {
 		User user = userService.getUserById(id);
 		model.addAttribute("user", user);
-		return "index";
+		return "user";
 	}
 
 }

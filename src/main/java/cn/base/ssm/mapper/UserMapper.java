@@ -1,15 +1,30 @@
 package cn.base.ssm.mapper;
 
-import java.util.List;
-
 import cn.base.ssm.po.User;
-
+import cn.base.ssm.po.UserExample;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
-	User getUserById(int id);
-	List<User> getUserByName(String username);
-	void insertUser(User user);
-	void deleteUser(int id);
-	void updateUser(User user);
+    int countByExample(UserExample example);
 
+    int deleteByExample(UserExample example);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(User record);
+
+    int insertSelective(User record);
+
+    List<User> selectByExample(UserExample example);
+
+    User selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
+
+    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
+
+    int updateByPrimaryKeySelective(User record);
+
+    int updateByPrimaryKey(User record);
 }

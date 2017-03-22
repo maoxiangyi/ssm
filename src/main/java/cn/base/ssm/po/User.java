@@ -2,71 +2,60 @@ package cn.base.ssm.po;
 
 import java.util.Date;
 
-
 public class User {
+    private Integer id;
 
-	private int id;
-	private String username;
-	private Date birthday;
-	private String sex;
-	private String address;
-	
+    private String username;
 
-	public User() {
-		super();
-	}
-	
-	public User(String username, Date birthday, String sex, String address) {
-		this.username = username;
-		this.birthday = birthday;
-		this.sex = sex;
-		this.address = address;
-	}
+    private Date birthday;
 
-	public int getId() {
-		return id;
-	}
+    private String sex;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    private String address;
 
-	public String getUsername() {
-		return username;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public Date getBirthday() {
-		return birthday;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
+    }
 
-	public String getSex() {
-		return sex;
-	}
+    public Date getBirthday() {
+        return birthday;
+    }
 
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public String getSex() {
+        return sex;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public void setSex(String sex) {
+        this.sex = sex == null ? null : sex.trim();
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address == null ? null : address.trim();
+    }
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", birthday=" + birthday + ", sex=" + sex + ", address="
 				+ address + "]";
 	}
-
 }

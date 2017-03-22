@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import cn.base.ssm.mapper.UserMapper;
 import cn.base.ssm.po.User;
+import cn.base.ssm.po.UserExample;
+import cn.base.ssm.po.UserExample.Criteria;
 import cn.base.ssm.service.UserService;
 
 @Service
@@ -16,24 +18,27 @@ public class UserServiceImpl implements UserService {
 	private UserMapper userMapper;
 
 	public User getUserById(int id) {
-		return userMapper.getUserById(id);
+		return userMapper.selectByPrimaryKey(id);
 	}
 
 	public List<User> getUserByName(String username) {
-		return userMapper.getUserByName(username);
+		UserExample example = new UserExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andUsernameLike(username);
+		return userMapper.selectByExample(example);
 	}
 
 	public void insertUser(User user) {
-		userMapper.insertUser(user);
+		userMapper.insert(user);
 		
 	}
 
 	public void deleteUser(int id) {
-		userMapper.deleteUser(id);
+		userMapper.deleteByPrimaryKey(id);
 	}
 
 	public void updateUser(User user) {
-		userMapper.updateUser(user);
+		userMapper.updateByPrimaryKey(user);
 	}
 
 }
