@@ -19,20 +19,6 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-	<!-- 解决post乱码 -->
-	<filter>
-		<filter-name>CharacterEncodingFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>utf-8</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>CharacterEncodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	
 	<!-- 第二部分：springmvc的前端控制器 -->
 	<servlet>
 		<servlet-name>springmvc</servlet-name>
@@ -50,4 +36,17 @@
 		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
 	
+	<!-- 解决post乱码 -->
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 </web-app>

@@ -150,6 +150,18 @@
 			<version>${jsp-api.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- 文件上传组件 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>${commons-fileupload.version}</version>
+		</dependency>
+		<!-- Jackson Json处理工具包 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<resources>
@@ -162,6 +174,7 @@
 				</includes>
 				<filtering>false</filtering>
 			</resource>
+			<!-- ibatis使用maven构建项目时，不配置resources 会丢失 *mapper.xml文件 -->
 			<resource>
 				<directory>src/main/java</directory>
 				<includes>

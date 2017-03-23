@@ -6,7 +6,8 @@
 </head>
 <body>
 	<script type="text/javascript">
-		window.location.href = '/index.html?id=33';
+		<!-- window.location.href = '/index.html?id=10';-->
+		window.location.href = 'http://localhost:8080/item/itemList.html'
 	</script>
 </body>
 </html>

@@ -22,8 +22,10 @@ ssm web project( Spring MVC、Spring、Ibatis)
 
 > 5、访问：http://localhost:8080/
 
-> 6、浏览器跳转页面到 http://localhost:8080/index.html?id=33
+> 6、拦截器生效跳转到登录界面，账户密码(root\root)
 
-> 7、返回结果
+> 7、自动跳转到商品列表页
 
-
+# 更新记录
+> 2017年3月21日  搭建ssm基础框架、能够查询用户信息
+> 2017年3月23日  增加商品管理模块(增删改查)、配合拦截器的登录功能

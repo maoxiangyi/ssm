@@ -3,16 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
-        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
         http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
-
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 	<!-- 常见的springmvc 配置文件包含三个部分：包扫描器、annotation-driven、视图解析器 -->
 
 	<!-- 第一部分：配置包扫描期 -->
 	<context:component-scan base-package="cn.base.ssm.controller" />
-	
+
 	<!-- 第二部分：配置 annotation-driven -->
 	<!-- springmvc 三大组件 HandlerMapping、HandlerAdapter、ViewResolver 默认配置在spring-webmvc-*.RELEASE.jar的DispatcherServlet.properties文件中 
 		可以根据根据自己的需求进行配置 -->
@@ -21,12 +20,57 @@
 	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/> -->
 
 	<!-- 配置注解驱动 如果配置此标签，可以不用手动配置 HandlerMapping、HandlerAdapter -->
-	<mvc:annotation-driven />
-	
+	<mvc:annotation-driven conversion-service="conversionService"
+		content-negotiation-manager="contentNegotiationManager" />
+	<!-- 配置转换器 -->
+	<bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<set>
+				<bean class="cn.base.ssm.converter.DateConverter" />
+			</set>
+		</property>
+	</bean>
+	<!-- 解决伪静态化下的ajax请求 406错误 -->
+	<bean id="contentNegotiationManager"
+		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+		<property name="favorPathExtension" value="false" />
+		<property name="favorParameter" value="false" />
+		<property name="ignoreAcceptHeader" value="false" />
+		<property name="mediaTypes">
+			<value>
+				atom=application/atom+xml
+				html=text/html
+				json=application/json
+				*=*/*
+			</value>
+		</property>
+	</bean>
+
 	<!-- 第三部分：配置视图解析器 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+
+	<!-- 配置全局异常处理 spring会自动扫描 -->
+	<bean class="cn.base.ssm.exception.GlobalExceptionResolver" />
+
+	<!-- 文件上传 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置上传文件的最大尺寸为5MB -->
+		<property name="maxUploadSize">
+			<value>5242880</value>
+		</property>
+	</bean>
+	
+	<!-- 配置拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="cn.base.ssm.interceptor.LoginInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
